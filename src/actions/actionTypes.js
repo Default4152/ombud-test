@@ -1,0 +1,3 @@
+// Action Types
+export const GET_INITIAL_DATA = 'GET_INITIAL_DATA';
+export const UPDATE_STATE_SUCCESS = 'UPDATE_STATE_SUCCESS';
