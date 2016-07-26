@@ -16,10 +16,30 @@ const db = monk('localhost:27017/ombud');
 app.get('/mostComplaints', function(req, res) {
   let choice = req.headers["x-custom-header"];
   let collection = db.collection('consumer_complaints');
-  console.log('choice:::', choice);
   collection.aggregate(
     [{$match: {"State" : choice}}, {$group: {_id: "$Product", "count": {$sum: 1}}}, {$sort: {"count": -1}}, {$limit: 1}], function(e, data) {
       res.json(data[0]._id);
+  });
+});
+
+app.get('/fastestGrowing', function (req, res) {
+  db.collection('consumer_complaints').aggregate([{$match: {"Product" : "Bank account or service"}}, {$group: {_id: "$State", "count": {$sum: 1}}}, {$sort: {"count": -1}}, {$limit: 10}], function(e, data) {
+    let topTenComplaints = data.slice(0, 11);
+    db.collection('state_populations').find({$where : "this.ESTIMATESBASE2010 < this.POPESTIMATE2015"}).then((data) => {
+      let fastestGrowingStates = data.sort((a, b) => parseFloat(b.POPDIFF) - parseFloat(a.POPDIFF)).map(currentObj => {
+        return {POPDIFF: currentObj.POPDIFF, NAME: currentObj.STATEA};
+      }).filter(currentObj => currentObj.POPDIFF > 100000).slice(0, 10);
+      let determinedStates = [];
+      topTenComplaints.forEach((complaint) => {
+        let complaintState = complaint._id;
+        for (let key in fastestGrowingStates) {
+          if (fastestGrowingStates[key].NAME === complaintState) {
+            determinedStates.push({state: fastestGrowingStates[key].NAME, populationDiff: fastestGrowingStates[key].POPDIFF, complaintCount: complaint.count});
+          }
+        }
+      });
+      res.json(determinedStates.sort((a, b) => parseFloat(b.complaintCount) - parseFloat(a.complaintCount))[0]);
+    });
   });
 });
 
