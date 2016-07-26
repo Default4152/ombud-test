@@ -9,6 +9,10 @@ export function updateStateData(stateData) {
     return {type: types.UPDATE_STATE_SUCCESS, stateData};
 }
 
+export function updateComplaintData(complaintData) {
+    return {type: types.GET_FASTEST_COMPLAINT, complaintData}
+}
+
 export function loadInitialData() {
     return function(dispatch, getState) {
         return DataApi.getInitialData().then(data => {
@@ -27,6 +31,19 @@ export function getStateData(state) {
             return stateData.json();
         }).then(stateData => {
             dispatch(updateStateData(stateData));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function getComplaintData(complaint) {
+    return function (dispatch, getState) {
+        return DataApi.getComplaintData(complaint).then(complaintData => {
+            return complaintData.json();
+        }).then(complaintData => {
+            dispatch(updateComplaintData(complaintData));
+            console.log('state:::', getState());
         }).catch(error => {
             throw(error);
         });

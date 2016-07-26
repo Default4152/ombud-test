@@ -8,7 +8,7 @@ import monk from 'monk';
 
 /* eslint-isable no-console */
 
-const port = 3036;
+const port = 3037;
 const app = express();
 const compiler = webpack(config);
 const db = monk('localhost:27017/ombud');
@@ -23,7 +23,8 @@ app.get('/mostComplaints', function(req, res) {
 });
 
 app.get('/fastestGrowing', function (req, res) {
-  db.collection('consumer_complaints').aggregate([{$match: {"Product" : "Bank account or service"}}, {$group: {_id: "$State", "count": {$sum: 1}}}, {$sort: {"count": -1}}, {$limit: 10}], function(e, data) {
+  let choice = req.headers["x-custom-header"];
+  db.collection('consumer_complaints').aggregate([{$match: {"Product" : choice}}, {$group: {_id: "$State", "count": {$sum: 1}}}, {$sort: {"count": -1}}, {$limit: 10}], function(e, data) {
     let topTenComplaints = data.slice(0, 11);
     db.collection('state_populations').find({$where : "this.ESTIMATESBASE2010 < this.POPESTIMATE2015"}).then((data) => {
       let fastestGrowingStates = data.sort((a, b) => parseFloat(b.POPDIFF) - parseFloat(a.POPDIFF)).map(currentObj => {
@@ -38,7 +39,7 @@ app.get('/fastestGrowing', function (req, res) {
           }
         }
       });
-      res.json(determinedStates.sort((a, b) => parseFloat(b.complaintCount) - parseFloat(a.complaintCount))[0]);
+      res.json(determinedStates.sort((a, b) => parseFloat(b.complaintCount) - parseFloat(a.complaintCount)).slice(0, 5));
     });
   });
 });

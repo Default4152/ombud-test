@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import data from './dataReducer';
+import complaintData from './complaintReducer';
 
 const rootReducer = combineReducers({
-    data
+    data,
+    complaintData
 });
 
 export default rootReducer;
