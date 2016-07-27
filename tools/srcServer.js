@@ -44,6 +44,34 @@ app.get('/fastestGrowing', function (req, res) {
   });
 });
 
+app.get('/births', function(req, res) {
+  let choice = req.headers["x-custom-header"];
+  let birthsSortedForComplaint = [];
+  db.collection('consumer_complaints').aggregate([{$match: {"Company" : choice}}, {$group: {_id: "$State", "count": {$sum: 1}}}, {$sort: {"count": -1}}, {$limit: 100}], function(e, complaintData) {
+    db.collection('state_populations').find({}).then((stateData) => {
+      complaintData.forEach((complaintState) => {
+        stateData.forEach((state) => {
+          if (complaintState._id === state.STATEA) {
+            birthsSortedForComplaint.push(
+              {
+                state: complaintState._id, 
+                "2010": state["BIRTHS2010"],
+                "2011": state["BIRTHS2011"],
+                "2012": state["BIRTHS2012"],
+                "2013": state["BIRTHS2013"],
+                "2014": state["BIRTHS2014"],
+                "2015": state["BIRTHS2015"]
+              }
+            )
+          }
+        });
+      });
+
+      res.json(birthsSortedForComplaint);
+    });
+  });
+})
+
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath

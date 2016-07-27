@@ -16,6 +16,12 @@ class DataApi {
            headers: new Headers({'X-Custom-Header': complaint})
        });
     }
+
+    static getBirthData(company) {
+        return fetch('http://localhost:3037/births', {
+           headers: new Headers({'X-Custom-Header': company})
+       });
+    }
 }
 
 export default DataApi;
