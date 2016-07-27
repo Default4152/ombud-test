@@ -26,85 +26,82 @@ class HomePage extends React.Component {
     this.showBirthData = this.showBirthData.bind(this);
   }
 
-   _onStateSelect(e) {
-     this.props.actions.getStateData(e.value);
-     this.setState({
-       selectedState: e.value
-     });
-   }
+    _onStateSelect(e) {
+      this.props.actions.getStateData(e.value);
+      this.setState({
+        selectedState: e.value
+      });
+    }
 
-   _onComplaintSelect(e) {
-     this.props.actions.getComplaintData(e.value);
-     this.setState({
-       selectedComplaint: e.value
-     });
-   }
+    _onComplaintSelect(e) {
+        this.props.actions.getComplaintData(e.value);
+        this.setState({
+            selectedComplaint: e.value
+        });
+    }
 
-   _onCompanySelect(e) {
-     this.setState({
-       selectedCompany: e.value
-     });
-   }
+    _onCompanySelect(e) {
+        this.setState({
+            selectedCompany: e.value
+        });
+    }
 
-   _onDateOneSelect(e) {
-     if (parseInt(e.value) >= (parseInt(this.state.dateTwo))) {
-       this._onClick();
-       this.setState({
-        dateOne: this.state.dateOne
-       });
-     } else {
-       this.setState({
-        dateOne: e.value
-       });
-     }
-   }
+    _onDateOneSelect(e) {
+        if (parseInt(e.value) >= (parseInt(this.state.dateTwo))) {
+            this._onClick();
+            this.setState({
+                dateOne: this.state.dateOne
+            });
+        } else {
+            this.setState({
+                dateOne: e.value
+            });
+        }
+    }
 
-   _onDateTwoSelect(e) {
-     if (parseInt(e.value) <= (parseInt(this.state.dateOne))) {
-       this._onClick();
-       this.setState({
-        dateTwo: this.state.dateTwo
-       });
-     } else {
-       this.setState({
-        dateTwo: e.value
-       });
-     }
-     
-   }
+    _onDateTwoSelect(e) {
+        if (parseInt(e.value) <= (parseInt(this.state.dateOne))) {
+            this._onClick();
+            this.setState({
+                dateTwo: this.state.dateTwo
+            });
+        } else {
+            this.setState({
+                dateTwo: e.value
+            });
+        }
+
+    }
 
    _onClick(e) {
      this.props.actions.getBirthData(this.state.selectedCompany);
    }
 
    showBirthData() {
-     return this.props.birthData.map((data, idx) => {
-       function getBirths(dateOne, dateTwo) {
-         let counter = 0;
-         for (var key in data) {
-          if (parseInt(key) == dateOne) {
-            counter += parseInt(data[key]) || 0;
-          } else if(!(parseInt(key) > dateTwo) && !(parseInt(key) < dateOne)) {
-            counter += parseInt(data[key]) || 0;
-          }
+    return this.props.birthData.map((data, idx) => {
+        function getBirths(dateOne, dateTwo) {
+            let counter = 0;
+            for (var key in data) {
+                if (parseInt(key) == dateOne) {
+                    counter += parseInt(data[key]) || 0;
+                } else if (!(parseInt(key) > dateTwo) && !(parseInt(key) < dateOne)) {
+                    counter += parseInt(data[key]) || 0;
+                }
+            }
+            return counter;
         }
-        return counter;
-       }
-       return (
-       <tr key={data.state}>
-        <td>
-        {data.state}
-        </td>
-        <td>
-        {getBirths(this.state.dateOne, this.state.dateTwo)}
-        </td>
-       </tr>
-     )
-     });
-     
-   }
-
-
+        return (
+          <tr key={data.state}>
+              <td>
+                {data.state}
+              </td>
+              <td>
+                {getBirths(this.state.dateOne, this.state.dateTwo)}
+              </td>
+          </tr>
+        )
+    });
+  }
    
    render() {
      const stateOptions = [
@@ -155,89 +152,87 @@ class HomePage extends React.Component {
 
         return (
             <div>
-                <h3>
-                  Most product complaints <strong>in </strong> 
-                  <span className="label label-default">{this.state.selectedState}</span> <strong> is </strong> 
-                  <span className="label label-danger">
-                    {this.props.data.length > 0 ? this.props.data[0].value : 0}
-                  </span>
-                </h3>
-                <Dropdown options={stateOptions} onChange={this._onStateSelect} value={this.state.selectedState} placeholder="Select a state" />
-                
-                <br />
-                <br />
-                <div>
-                <h3>Fastest growing state that <strong>also</strong> had the highest complaint count in                </h3> 
+              <h3>
+                Most product complaints <strong>in </strong> 
+                <span className="label label-default">{this.state.selectedState}</span> <strong> is </strong> 
+                <span className="label label-danger">
+                  {this.props.data.length > 0 ? this.props.data[0].value : 0}
+                </span>
+              </h3>
+              <Dropdown options={stateOptions} onChange={this._onStateSelect} value={this.state.selectedState} placeholder="Select a state" />
+
+              <br />
+              <br />
+              <div>
+                  <h3>Fastest growing state that <strong>also</strong> had the highest complaint count in                </h3>
                   <br />
                   <br />
                   <Dropdown options={complaintOptions} onChange={this._onComplaintSelect} value={this.state.selectedComplaint} placeholder="Select a complaint" />
                   <br />
                   <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>State</th>
-                      <th>Complaint Count</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <tr className="success">
-                        <td>1</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][0].state : 'CA'}</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][0].complaintCount : '9278'}</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][1].state : 'FL'}</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][1].complaintCount : '6257'}</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][2].state : 'NY'}</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][2].complaintCount : '6033'}</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][3].state : 'TX'}</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][3].complaintCount : '3980'}</td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][4].state : 'GA'}</td>
-                        <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][4].complaintCount : '2709'}</td>
-                      </tr>
-                    </tbody>
+                      <thead>
+                          <tr>
+                              <th>#</th>
+                              <th>State</th>
+                              <th>Complaint Count</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr className="success">
+                              <td>1</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][0].state : 'CA'}</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][0].complaintCount : '9278'}</td>
+                          </tr>
+                          <tr>
+                              <td>2</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][1].state : 'FL'}</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][1].complaintCount : '6257'}</td>
+                          </tr>
+                          <tr>
+                              <td>3</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][2].state : 'NY'}</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][2].complaintCount : '6033'}</td>
+                          </tr>
+                          <tr>
+                              <td>4</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][3].state : 'TX'}</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][3].complaintCount : '3980'}</td>
+                          </tr>
+                          <tr>
+                              <td>5</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][4].state : 'GA'}</td>
+                              <td>{this.props.complaintData.length > 0 ? this.props.complaintData[0][4].complaintCount : '2709'}</td>
+                          </tr>
+                      </tbody>
                   </table>
-                  </div>
-                <div>
-                <h3>             </h3> 
+              </div>
+              <div>
+                  <h3>             </h3>
                   <br />
                   <br />
                   <Dropdown options={companyOptions} onChange={this._onCompanySelect} value={this.state.selectedCompany} placeholder="Select a company" />
-                  <Dropdown options={dateOptions} onChange={this._onDateOneSelect} value={this.state.dateOne} placeholder="Select a date" />
-                  between
+                  <Dropdown options={dateOptions} onChange={this._onDateOneSelect} value={this.state.dateOne} placeholder="Select a date" /> between
                   <Dropdown options={dateOptions} onChange={this._onDateTwoSelect} value={this.state.dateTwo} placeholder="Select a date" />
                   <button onClick={this._onClick}>Submit</button>
                   <br />
                   <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>State</th>
-                      <th>Births between {this.state.dateOne} and {this.state.dateTwo}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      {this.showBirthData()}
-                  </tbody>
-                </table>
-                </div>
-            </div>
+                      <thead>
+                          <tr>
+                              <th>State</th>
+                              <th>Births between {this.state.dateOne} and {this.state.dateTwo}</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {this.showBirthData()}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
         );
     }
 }
 
 HomePage.propTypes = {
-    // data: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,
     complaintData: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired,

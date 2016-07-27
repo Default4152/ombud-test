@@ -47,7 +47,6 @@ export function getComplaintData(complaint) {
             return complaintData.json();
         }).then(complaintData => {
             dispatch(updateComplaintData(complaintData));
-            console.log('state:::', getState());
         }).catch(error => {
             throw(error);
         });
