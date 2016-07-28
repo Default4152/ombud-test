@@ -1,0 +1,1 @@
+web: npm-run-all --parallel test:watch open:src lint:watch
