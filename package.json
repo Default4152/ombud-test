@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Ombud Test",
   "scripts": {
+    // "prestart": "babel-node tools/startMessage.js",
+    // "start": "npm-run-all --parallel test:watch open:src lint:watch",
     "prestart": "npm install",
-    "start": "npm-run-all --parallel test:watch open:src lint:watch",
+    "start": "npm start",
     "open:src": "babel-node tools/srcServer.js",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
