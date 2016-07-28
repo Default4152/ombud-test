@@ -121,7 +121,7 @@ app.get('/births', function (req, res) {
                             "2013": state["BIRTHS2013"],
                             "2014": state["BIRTHS2014"],
                             "2015": state["BIRTHS2015"]
-                        })
+                        });
                     }
                 });
             });
@@ -129,7 +129,7 @@ app.get('/births', function (req, res) {
             res.json(birthsSortedForComplaint);
         });
     });
-})
+});
 
 app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,

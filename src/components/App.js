@@ -6,6 +6,7 @@ class App extends React.Component {
         return (
             <div className="homePage">
                 <h1>Ombud Technical Test</h1>
+                <hr />
                 <div>{this.props.children}</div>
             </div>
         );

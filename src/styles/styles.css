@@ -1,5 +1,5 @@
 * {
-  font-family: 'Questrial', sans-serif;
+  font-family: 'Droid Sans', sans-serif;
 }
 
 .homePage {
@@ -8,7 +8,7 @@
 }
 
 .homePage h1 {
-  margin-top: 10px;
+  margin-top: 28px;
   text-align: center;
 }
 
@@ -26,7 +26,7 @@
   color: #333;
   cursor: default;
   outline: none;
-  padding: 8px 52px 8px 10px;
+  padding: 3px 52px 3px 10px;
   transition: all 200ms ease;
 }
 
@@ -44,7 +44,7 @@
   margin-top: -ceil(2.5);
   position: absolute;
   right: 10px;
-  top: 14px;
+  top: 10px;
   width: 0
 }
 
@@ -80,7 +80,8 @@
   color: rgba(51, 51, 51, 0.8);
   cursor: pointer;
   display: block;
-  padding: 8px 10px;
+  padding: 4px 10px;
+  border-bottom: 1px solid #ccc;
 }
 
 .Dropdown-option:last-child {
@@ -104,4 +105,118 @@
   cursor: default;
   display: block;
   padding: 8px 10px;
+}
+
+.most-complaints .Dropdown-control {
+  width: 25%;
+  margin: 0 auto;
+}
+
+.most-complaints .Dropdown-option {
+}
+
+.most-complaints .Dropdown-menu {
+  width: 25%;
+  margin-left: 37.5%;
+  overflow-x: hidden;
+}
+
+.most-complaints, .fastest-growing {
+  margin-bottom: 50px;
+}
+
+.most-complaints, .fastest-growing, .birth-complaints {
+  width: 90%;
+  border: 1px solid gray;
+  box-shadow: 1px 1px 3px #888;
+  border-top: 10px solid #2574A9;
+  min-height: 200px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.fastest-growing h4:first-child, .most-complaints h4, .birth-complaints h4:first-child {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  margin-top: 0px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.fastest-growing h4 {
+  text-align: center;
+}
+
+.birth-complaints h4 {
+  text-align: center;
+}
+
+.dates .Dropdown-control {
+  width: 31.3%;
+  display: inline-block;
+  float: left;
+  margin-left: 1.5%;
+}
+.dates .Dropdown-menu {
+  width: 31.3%;
+  overflow-x: hidden;
+}
+
+.dates .Dropdown-root:last-child .Dropdown-menu {
+  margin-left: 67.1%;
+  margin-top: 45px;
+}
+
+.dates .Dropdown-root:nth-of-type(2) .Dropdown-menu {
+  margin-left: 34.3%;
+  margin-top: 45px;
+}
+
+.dates .Dropdown-root:nth-of-type(1) .Dropdown-menu {
+  margin-left: 1.5%;
+  margin-top: 45px;
+}
+.date-labels div {
+  width: 33.3%;
+  display: inline-block;
+  float: left;
+  text-align: center;
+}
+
+.birth-table {
+  margin-top: 60px;
+  height: 300px;
+  overflow: auto;
+
+}
+
+.Dropdown-placeholder {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.birth-table {
+  width: 96.9%;
+  margin: 0 auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+table thead tr th, table tbody tr {
+  text-align: center;
+}
+
+.btn-container {
+    margin-top: 40px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-container button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90px;
 }

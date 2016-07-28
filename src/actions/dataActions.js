@@ -10,11 +10,11 @@ export function updateStateData(stateData) {
 }
 
 export function updateComplaintData(complaintData) {
-    return {type: types.GET_FASTEST_COMPLAINT, complaintData}
+    return {type: types.GET_FASTEST_COMPLAINT, complaintData};
 }
 
 export function updateBirthData(birthData) {
-    return {type: types.GET_BIRTH_DATA, birthData}
+    return {type: types.GET_BIRTH_DATA, birthData};
 }
 
 export function loadInitialData() {
@@ -38,7 +38,7 @@ export function getStateData(state) {
         }).catch(error => {
             throw(error);
         });
-    }
+    };
 }
 
 export function getComplaintData(complaint) {
@@ -50,7 +50,7 @@ export function getComplaintData(complaint) {
         }).catch(error => {
             throw(error);
         });
-    }
+    };
 }
 
 export function getBirthData(company) {
@@ -62,5 +62,5 @@ export function getBirthData(company) {
         }).catch(error => {
             throw(error);
         });
-    }
+    };
 }
