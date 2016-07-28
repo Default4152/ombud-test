@@ -8,10 +8,16 @@ import monk from 'monk';
 
 /* eslint-isable no-console */
 
-const port = 5000;
+const port =  process.env.PORT || 5000;
 const app = express();
 const compiler = webpack(config);
-const db = monk('//admin:admin@ds031995.mlab.com:31995/ombud');
+const db = monk('admin:admin@ds031995.mlab.com:31995/ombud');
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 app.get('/mostComplaints', function (req, res) {
     let choice = req.headers["x-custom-header"];
@@ -142,7 +148,7 @@ app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../src/index.html'));
 });
 
-app.listen(process.env.PORT || port, function (err) {
+app.listen(port, function (err) {
     if (err) {
         console.log(err);
     } else {
