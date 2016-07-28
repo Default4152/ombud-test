@@ -1,24 +1,24 @@
 class DataApi {
     static getInitialData() {
-       return fetch('http://localhost:3038/mostComplaints', {
+       return fetch('https://sheltered-stream-12729.herokuapp.com/mostComplaints', {
            headers: new Headers({'X-Custom-Header': 'AK'})
        });
     }
 
     static getStateComplaintData(state) {
-        return fetch('http://localhost:3038/mostComplaints', {
+        return fetch('https://sheltered-stream-12729.herokuapp.com/mostComplaints', {
            headers: new Headers({'X-Custom-Header': state})
        });
     }
 
     static getComplaintData(complaint) {
-        return fetch('http://localhost:3038/fastestGrowing', {
+        return fetch('https://sheltered-stream-12729.herokuapp.com/fastestGrowing', {
            headers: new Headers({'X-Custom-Header': complaint})
        });
     }
 
     static getBirthData(company) {
-        return fetch('http://localhost:3038/births', {
+        return fetch('https://sheltered-stream-12729.herokuapp.com/births', {
            headers: new Headers({'X-Custom-Header': company})
        });
     }
