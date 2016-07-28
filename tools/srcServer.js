@@ -8,7 +8,7 @@ import monk from 'monk';
 
 /* eslint-isable no-console */
 
-const port = 3038;
+const port = 5000;
 const app = express();
 const compiler = webpack(config);
 const db = monk('admin:admin@ds031995.mlab.com:31995/ombud');
@@ -142,10 +142,10 @@ app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../src/index.html'));
 });
 
-app.listen(port, function (err) {
+app.listen(process.env.PORT || port, function (err) {
     if (err) {
         console.log(err);
     } else {
-        open(`http://localhost:${port}`);
+        open(`https://sheltered-stream-12729.herokuapp.com/:${port}`);
     }
 });
