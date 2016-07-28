@@ -11,7 +11,7 @@ import monk from 'monk';
 const port =  process.env.PORT || 5000;
 const app = express();
 const compiler = webpack(config);
-const db = monk('admin:admin@ds031995.mlab.com:31995/ombud');
+const db = monk('admin:admin@ds031995.mlab.com:31995/ombud'); // This is public, and typically shouldn't be
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
