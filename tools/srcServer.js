@@ -11,7 +11,7 @@ import monk from 'monk';
 const port = 5000;
 const app = express();
 const compiler = webpack(config);
-const db = monk('admin:admin@ds031995.mlab.com:31995/ombud');
+const db = monk('//admin:admin@ds031995.mlab.com:31995/ombud');
 
 app.get('/mostComplaints', function (req, res) {
     let choice = req.headers["x-custom-header"];
