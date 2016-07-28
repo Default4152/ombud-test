@@ -146,6 +146,6 @@ app.listen(process.env.PORT || port, function (err) {
     if (err) {
         console.log(err);
     } else {
-        open(`https://sheltered-stream-12729.herokuapp.com/:${port}`);
+        open(`http://localhost:${port}`);
     }
 });
