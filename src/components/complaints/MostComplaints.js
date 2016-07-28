@@ -39,10 +39,12 @@ export default class MostComplaints extends React.Component {
         ];
 
         return (
+            <div className="cover">
             <div className="most-complaints">
-                <h4>Most product complaints in state N</h4>
-                <Dropdown className="states-dropdown" options={stateOptions} onChange={this._onStateSelect} value={this.state.selectedState} placeholder="Select a state" />
+                <h4>Most product complaints in state N </h4>
+                <Dropdown className="states-dropdown" options={stateOptions} onChange={this._onStateSelect} value={this.state.selectedState} placeholder="Select a state" />  
                 <h1><span className="label label-success">{this.props.data.length > 0 ? this.props.data[0].value : "Mortgage"}</span></h1>
+            </div>
             </div>
         );
     }

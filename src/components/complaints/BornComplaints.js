@@ -7,7 +7,7 @@ export default class BornComplaints extends React.Component {
         super(props, context);
 
         this.state = {
-            selectedCompany: 'Bank of America',
+            selectedCompany: "Bank of America",
             dateOne: "2010",
             dateTwo: "2012"
         };
@@ -84,9 +84,10 @@ export default class BornComplaints extends React.Component {
 
     _onClick(e) {
         this.props.actions.getBirthData(this.state.selectedCompany);
+        this.setState({
+            showSpinner: 'block'
+        });
     }
-
-    
 
     render() {
         const dateOptions = [

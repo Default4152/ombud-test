@@ -7,6 +7,7 @@ import MostComplaints from '../complaints/MostComplaints';
 import FastestGrowingState from '../complaints/FastestGrowingState';
 import BornComplaints from '../complaints/BornComplaints';
 
+
 class HomePage extends React.Component {
    render() {
         return (

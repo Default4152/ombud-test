@@ -71,5 +71,8 @@
   "repository": {
     "type": "",
     "url": ""
+  },
+  "engines": {
+    "node": "5.1.1"
   }
 }
